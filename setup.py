@@ -9,7 +9,7 @@ with open('requirements.txt', encoding='utf-8') as f:
     requirements = f.read().splitlines()	
 
 setup(	
-    name="dspy-ai",	
+    name="dspy-ai-hmoazam",	
     version="2.4.3",	
     description="DSPy",	
     long_description=long_description,	
