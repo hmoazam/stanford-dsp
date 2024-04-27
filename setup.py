@@ -9,8 +9,8 @@ with open('requirements.txt', encoding='utf-8') as f:
     requirements = f.read().splitlines()	
 
 setup(	
-    name="dspy-ai",	
-    version="2.4.9",	
+    name="dspy-ai-hmoazam",	
+    version="{{VERSION_PLACEHOLDER}}", 	
     description="DSPy",	
     long_description=long_description,	
     long_description_content_type='text/markdown',	
@@ -29,8 +29,6 @@ setup(
         "pinecone": ["pinecone-client~=2.2.4"],	
         "weaviate": ["weaviate-client~=3.26.1"],	
         "faiss-cpu": ["sentence_transformers", "faiss-cpu"],
-        "milvus": ["pymilvus~=2.3.7"],
-        "google-vertex-ai": ["google-cloud-aiplatform==1.43.0"],
     },	
     classifiers=[	
         "Development Status :: 3 - Alpha",	
