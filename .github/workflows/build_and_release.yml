@@ -1,0 +1,39 @@
+---
+name: Publish Python 🐍 distributions 📦 to PyPI
+on:
+  push:
+    tags:
+      - "*"
+jobs:
+  # build-and-publish-test-pypi: TODO
+
+  # test-intro-notebook: TODO
+
+  build-and-publish-pypi:
+    name: Build and publish Python 🐍 distributions 📦 to PyPI
+    runs-on: ubuntu-latest
+    environment: 
+      name: pypi
+      url: https://test.pypi.org/p/dspy-ai-test 
+    permissions:
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+    steps:
+      - uses: actions/checkout@master
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+      - name: Install dependencies
+        run: python3 -m pip install setuptools wheel twine
+      - name: Extract tag name
+        id: tag
+        run: echo ::set-output name=TAG_NAME::$(echo $GITHUB_REF | cut -d / -f 3)
+      - name: Update version in setup.py
+        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g"
+          setup.py
+      - name: Build a binary wheel
+        run: python3 setup.py sdist bdist_wheel
+      - name: Publish distribution 📦 to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1 # This requires a trusted publisher to be setup in pypi 
+  # create-release-github: # TODO
+  # Make sure to include release notes
