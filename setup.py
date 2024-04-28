@@ -9,7 +9,7 @@ with open('requirements.txt', encoding='utf-8') as f:
     requirements = f.read().splitlines()	
 
 setup(	
-    name="dspy-ai-hmoazam",	# TODO: Change to dspy-ai once trusted publisher setup.
+    name="dspy-ai-test",	# TODO: Make dynamic for testpypi and pypi
     version="{{VERSION_PLACEHOLDER}}", 	
     description="DSPy",	
     long_description=long_description,	
