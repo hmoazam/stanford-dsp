@@ -3,7 +3,7 @@ requires = ["setuptools>=40.8.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "dspy-ai"
+name = "dspy-ai-test"
 version = "{{VERSION_PLACEHOLDER}}"
 description = "DSPy"
 readme = "README.md"
