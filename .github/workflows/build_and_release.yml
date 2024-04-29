@@ -6,7 +6,6 @@ on:
       - "*"
 jobs:
   build-and-publish-test-pypi:
-  name: Build and publish Python 🐍 distributions 📦 to PyPI
     runs-on: ubuntu-latest
     environment: 
       name: pypi
@@ -43,7 +42,6 @@ jobs:
 
   # build-and-publish-pypi:
   #   needs: [build-and-publish-test-pypi, test-intro-notebook]
-  #   name: Build and publish Python 🐍 distributions 📦 to PyPI
   #   runs-on: ubuntu-latest
   #   environment: 
   #     name: pypi
