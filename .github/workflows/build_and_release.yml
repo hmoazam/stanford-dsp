@@ -38,8 +38,15 @@ jobs:
         with: 
           repository-url: https://test.pypi.org/legacy/
 
+  delay-3s:  
+    needs: build-and-publish-test-pypi  
+    runs-on: ubuntu-latest  
+    steps:  
+      - name: Delay  
+        run: sleep 3  # Sleep for 3 seconds to ensure package published to testpypi
+
   test-intro-script: 
-    needs: build-and-publish-test-pypi
+    needs: [build-and-publish-test-pypi, delay-3s]
     runs-on: ubuntu-latest
     steps:  
       - uses: actions/checkout@v2  
