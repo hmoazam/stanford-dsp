@@ -2,7 +2,15 @@
 # Copy of intro notebook for the sake of testing new versions of the package.
 ###
 
+import sys  
+import os 
 
+# Set up the cache directory, using the environment variable set in the workflow  
+cache_dir = os.getenv("DSP_NOTEBOOK_CACHEDIR")  
+if not os.path.exists(cache_dir):  
+    os.makedirs(cache_dir)  
+  
+# Now import dspy or any other required modules  
 import dspy
 
 turbo = dspy.OpenAI(model='gpt-3.5-turbo')
