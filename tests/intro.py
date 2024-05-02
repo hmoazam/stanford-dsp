@@ -139,7 +139,7 @@ evaluate_on_hotpotqa = Evaluate(devset=devset, num_threads=1, display_progress=T
 
 # Evaluate the `compiled_rag` program with the `answer_exact_match` metric.
 metric = dspy.evaluate.answer_exact_match
-print(evaluate_on_hotpotqa(compiled_rag, metric=metric))
+evaluate_on_hotpotqa(compiled_rag, metric=metric)
 
 
 def gold_passages_retrieved(example, pred, trace=None):
