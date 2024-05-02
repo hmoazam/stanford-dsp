@@ -52,7 +52,7 @@ jobs:
           python3 -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple dspy-ai-test==${{ needs.build-and-publish-test-pypi.outputs.version }}  
       - name: Run Python script
         run: |  
-          python3 tests/build/intro.py  
+          python3 tests/intro.py  
 
 
   # build-and-publish-pypi:
