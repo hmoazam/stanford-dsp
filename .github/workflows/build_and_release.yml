@@ -58,6 +58,7 @@ jobs:
         run: |  
           python3 -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple dspy-ai-test==${{ needs.build-and-publish-test-pypi.outputs.version }}  
           python3 -m pip install openai~=0.28.1  
+          python3 -m pip install Jinja2
       - name: Set up cache directory  
         run: | 
           mkdir -p cache  
