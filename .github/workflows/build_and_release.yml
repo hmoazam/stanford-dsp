@@ -88,10 +88,10 @@ jobs:
     needs: [extract-tag, build-and-publish-test-pypi, test-intro-notebook]
     runs-on: ubuntu-latest
     outputs:  
-      package_name: "dspy-ai"
+      package_name: "dspy-ai-hmoazam" #TODO: Change to actual
     environment: 
       name: pypi
-      url: https://pypi.org/p/dspy-ai
+      url: https://pypi.org/p/dspy-ai-hmoazam #TODO: Change to actual
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
     steps:
