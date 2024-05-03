@@ -38,15 +38,8 @@ jobs:
         with: 
           repository-url: https://test.pypi.org/legacy/
 
-  delay-5s:  
-    needs: build-and-publish-test-pypi  
-    runs-on: ubuntu-latest  
-    steps:  
-      - name: Delay  
-        run: sleep 5  # Sleep for 3 seconds to ensure package published to testpypi
-
   test-intro-script: 
-    needs: [build-and-publish-test-pypi, delay-5s]
+    needs: build-and-publish-test-pypi
     runs-on: ubuntu-latest
     steps:  
       - uses: actions/checkout@v2  
@@ -54,9 +47,18 @@ jobs:
         uses: actions/setup-python@v3
         with:  
           python-version: "3.9"  
-      - name: Install package from TestPyPI and other dependencies
+      - name: Install package from TestPyPI
         run: |  
-          python3 -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple dspy-ai-test==${{ needs.build-and-publish-test-pypi.outputs.version }}  
+          for i in {1..5}; do  
+            if python3 -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple dspy-ai-test==${{ needs.build-and-publish-test-pypi.outputs.version }}; then  
+              break  
+            else  
+              echo "Attempt $i failed. Waiting before retrying..."  
+              sleep 10  
+            fi  
+          done  
+      - name: Install other dependencies
+        run: |  
           python3 -m pip install openai~=0.28.1  
           python3 -m pip install Jinja2
       - name: Set up cache directory  
