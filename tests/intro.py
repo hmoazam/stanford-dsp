@@ -13,8 +13,6 @@ if not os.path.exists(cache_dir):
 # Now import dspy or any other required modules  
 import dspy
 
-print(dspy.__version__) 
-
 turbo = dspy.OpenAI(model='gpt-3.5-turbo')
 colbertv2_wiki17_abstracts = dspy.ColBERTv2(url='http://20.102.90.50:2017/wiki17_abstracts')
 
