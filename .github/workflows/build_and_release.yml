@@ -32,19 +32,13 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install setuptools wheel twine
       - name: Update version in setup.py
-        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g"
-          setup.py
+        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g" setup.py
       - name: Update version in pyproject.toml
-        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g"
-          pyproject.toml
+        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g" pyproject.toml
       - name: Update package name in setup.py
-        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-test/g"
-          setup.py
+        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-test/g" setup.py
       - name: Update package name in pyproject.toml
-        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-test/g"
-          pyproject.toml
-      - name: Print setup.py content  
-        run: cat setup.py  
+        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-test/g" pyproject.toml
       - name: Build a binary wheel
         run: python3 setup.py sdist bdist_wheel
       - name: Publish distribution 📦 to PyPI
@@ -99,17 +93,13 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install setuptools wheel twine
       - name: Update version in setup.py
-        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g"
-          setup.py
+        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g" setup.py
       - name: Update version in pyproject.toml
-        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g"
-          pyproject.toml
+        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g" pyproject.toml
       - name: Update package name in setup.py  
-        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-hmoazam/g" #TODO: Change to actual
-          setup.py
+        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-hmoazam/g" setup.py #TODO: Change to actual 
       - name: Update package name in pyproject.toml
-        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-hmoazam/g" #TODO: Change to actual
-          pyproject.toml
+        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-hmoazam/g" pyproject.toml #TODO: Change to actual
       - name: Build a binary wheel
         run: python3 setup.py sdist bdist_wheel
       - name: Publish distribution 📦 to PyPI
