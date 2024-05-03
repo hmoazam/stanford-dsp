@@ -46,6 +46,8 @@ jobs:
       - name: Update package name in pyproject.toml
         run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/${{ needs.build-and-publish-test-pypi.outputs.package_name }}/g"
           pyproject.toml
+      - name: Print setup.py content  
+        run: cat setup.py  
       - name: Build a binary wheel
         run: python3 setup.py sdist bdist_wheel
       - name: Publish distribution 📦 to PyPI
