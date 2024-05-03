@@ -41,10 +41,10 @@ jobs:
         run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g"
           pyproject.toml
       - name: Update package name in setup.py
-        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/${{ needs.build-and-publish-test-pypi.outputs.package_name }}/g"
+        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/${{ dspy-ai-test }}/g"
           setup.py
       - name: Update package name in pyproject.toml
-        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/${{ needs.build-and-publish-test-pypi.outputs.package_name }}/g"
+        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/${{ dspy-ai-test }}/g"
           pyproject.toml
       - name: Print setup.py content  
         run: cat setup.py  
