@@ -85,7 +85,7 @@ jobs:
           python3 tests/intro.py 
 
   build-and-publish-pypi:
-    needs: [extract-tag, build-and-publish-test-pypi, test-intro-notebook]
+    needs: [extract-tag, build-and-publish-test-pypi, test-intro-script]
     runs-on: ubuntu-latest
     outputs:  
       package_name: "dspy-ai-hmoazam" #TODO: Change to actual
