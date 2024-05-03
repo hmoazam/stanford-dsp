@@ -19,11 +19,8 @@ jobs:
   build-and-publish-test-pypi:
     needs: extract-tag
     runs-on: ubuntu-latest
-    outputs:  
-      package_name: "dspy-ai-test"
     environment: 
       name: pypi
-      url: https://test.pypi.org/p/dspy-ai-test
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
     steps:
@@ -89,11 +86,8 @@ jobs:
   build-and-publish-pypi:
     needs: [extract-tag, build-and-publish-test-pypi, test-intro-script]
     runs-on: ubuntu-latest
-    outputs:  
-      package_name: "dspy-ai-hmoazam" #TODO: Change to actual
     environment: 
       name: pypi
-      url: https://pypi.org/p/dspy-ai-hmoazam #TODO: Change to actual
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
     steps:
@@ -111,10 +105,10 @@ jobs:
         run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g"
           pyproject.toml
       - name: Update package name in setup.py  
-        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/${{ needs.build-and-publish-pypi.outputs.package_name }}/g" 
+        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-hmoazam/g" #TODO: Change to actual
           setup.py
       - name: Update package name in pyproject.toml
-        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/${{ needs.build-and-publish-pypi.outputs.package_name }}/g"
+        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-hmoazam/g" #TODO: Change to actual
           pyproject.toml
       - name: Build a binary wheel
         run: python3 setup.py sdist bdist_wheel
