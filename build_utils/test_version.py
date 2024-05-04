@@ -42,12 +42,8 @@ if __name__ == "__main__":
 
     latest_version, increment = get_latest_version(package_name, tag_v)  
     if increment:
-        print(f"Latest version: {latest_version}")  
-        # Increment and output new version tag
         new_version = increment_version(latest_version)
-    else:  
-        print(f"Latest version: {latest_version}") 
-        print("Package not found, tag version to be published")  
+    else:   
         new_version = latest_version
 
     # Output new version
