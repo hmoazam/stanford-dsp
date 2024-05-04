@@ -43,8 +43,8 @@ if __name__ == "__main__":
     latest_version, increment = get_latest_version(package_name, tag_v)  
     if increment:
         new_version = increment_version(latest_version)
-    else:   
+    else: 
         new_version = latest_version
 
     # Output new version
-    print(f"::set-output name=new_version::{new_version}")  
+    print(new_version)  
