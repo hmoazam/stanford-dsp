@@ -31,13 +31,13 @@ jobs:
           python-version: "3.9"
       - name: Install dependencies
         run: python3 -m pip install setuptools wheel twine semver
-      - name: Check version and get correct version for TestPyPI release  
+      - name: Get correct version for TestPyPI release  
         id: check_version  
         run: |  
           VERSION=${{ needs.extract-tag.outputs.version }}  
           PACKAGE_NAME="dspy-ai-test"
           echo "Checking if $VERSION for $PACKAGE_NAME exists on TestPyPI"  
-          NEW_VERSION=$(python3 test_version.py --package-name $PACKAGE_NAME --current-version $VERSION)  
+          NEW_VERSION=$(python3 build_utils/test_version.py --package-name $PACKAGE_NAME --current-version $VERSION)  
           echo "Version to be used for TestPyPI release: $NEW_VERSION"  
           echo "::set-output name=version::$NEW_VERSION"  
       - name: Update version in setup.py
