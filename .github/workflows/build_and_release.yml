@@ -50,7 +50,7 @@ jobs:
         run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-test/g" pyproject.toml
       - name: Build a binary wheel
         run: python3 setup.py sdist bdist_wheel
-      - name: Publish distribution 📦 to PyPI
+      - name: Publish distribution 📦 to test-PyPI
         uses: pypa/gh-action-pypi-publish@release/v1 # This requires a trusted publisher to be setup in pypi/testpypi
         with: 
           repository-url: https://test.pypi.org/legacy/
