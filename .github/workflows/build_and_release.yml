@@ -30,11 +30,20 @@ jobs:
         with:
           python-version: "3.9"
       - name: Install dependencies
-        run: python3 -m pip install setuptools wheel twine
+        run: python3 -m pip install setuptools wheel twine semver
+      - name: Check version and get correct version for TestPyPI release  
+        id: check_version  
+        run: |  
+          VERSION=${{ needs.extract-tag.outputs.version }}  
+          PACKAGE_NAME="dspy-ai-test"
+          echo "Checking if $VERSION for $PACKAGE_NAME exists on TestPyPI"  
+          NEW_VERSION=$(python3 test_version.py --package-name $PACKAGE_NAME --current-version $VERSION)  
+          echo "Version to be used for TestPyPI release: $NEW_VERSION"  
+          echo "::set-output name=version::$NEW_VERSION"  
       - name: Update version in setup.py
-        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g" setup.py
+        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.check_version.outputs.version }}/g" setup.py
       - name: Update version in pyproject.toml
-        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g" pyproject.toml
+        run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.check_version.outputs.version }}/g" pyproject.toml
       - name: Update package name in setup.py
         run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-test/g" setup.py
       - name: Update package name in pyproject.toml
@@ -75,7 +84,7 @@ jobs:
           echo "DSP_NOTEBOOK_CACHEDIR=$(pwd)/cache" >> $GITHUB_ENV  
       - name: Run Python script  
         run: |    
-          python3 tests/intro.py 
+          python3 build_utils/tests/intro.py 
 
   build-and-publish-pypi:
     needs: [extract-tag, build-and-publish-test-pypi, test-intro-script]
