@@ -1,8 +1,8 @@
+from packaging.version import Version as PyPIVersion
 from datetime import datetime
 import requests
 import semver
-import sys  
-
+import sys
 
 def get_latest_version(package_name, tag_version):  
     # Returns latest version, and T/F as to whether it needs to be incremented
@@ -29,16 +29,21 @@ def get_latest_version(package_name, tag_version):
         return None, None  
     
 def increment_version(curr_version):
-    parsed_v = semver.Version.parse(curr_version)
+    pypi_v = PyPIVersion(curr_version)
+    if pypi_v.pre:
+        pre = "".join([str(i) for i in pypi_v.pre])
+        parsed_v = semver.Version(*pypi_v.release, pre)
+    else:
+        parsed_v = semver.Version(*pypi_v.release)
     new_v = str(parsed_v.bump_prerelease())
     return new_v
   
 if __name__ == "__main__":  
-    if len(sys.argv) != 3:  
-        raise ValueError("Usage: python get_latest_testpypi_version.py <package_name> <tag_version>")  
+    # if len(sys.argv) != 3:  
+    #     raise ValueError("Usage: python get_latest_testpypi_version.py <package_name> <tag_version>")  
       
-    package_name = sys.argv[1]
-    tag_v = sys.argv[2]
+    package_name = "dspy-ai-test" # sys.argv[1]
+    tag_v = "1.5.9" # sys.argv[2]
 
     latest_version, increment = get_latest_version(package_name, tag_v)  
     if increment:
