@@ -106,14 +106,10 @@ jobs:
       - name: Update version in pyproject.toml
         run: sed -i "s/{{VERSION_PLACEHOLDER}}/${{ needs.extract-tag.outputs.version }}/g" pyproject.toml
       - name: Update package name in setup.py  
-        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-hmoazam/g" setup.py #TODO: Change to actual 
+        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai/g" setup.py
       - name: Update package name in pyproject.toml
-        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai-hmoazam/g" pyproject.toml #TODO: Change to actual
+        run: sed -i "s/{{PACKAGE_NAME_PLACEHOLDER}}/dspy-ai/g" pyproject.toml
       - name: Build a binary wheel
         run: python3 setup.py sdist bdist_wheel
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1 # This requires a trusted publisher to be setup in pypi/testpypi
-
-  # create-release-github: # TODO
-  #   needs: needs: [build-and-publish-test-pypi, test-intro-notebook, build-and-publish-pypi]
-  # Make sure to include release notes

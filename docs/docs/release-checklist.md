@@ -13,18 +13,9 @@
     git tag -d X.Y.Z # Delete locally
     ```
     * Fix the errors and then repeat the steps above to recreate the tag locally and push to Github to restart the process.
-* [ ] Add release notes (TODO, automate).
+    * Note that the github action takes care of incrementing the release version on test-pypi automatically by adding a pre-release identifier in the scenario where the tests fail and you need to delete and push the same tag again. 
+* [ ] [Create a release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) 
+* [ ] Add release notes. You can make use of [automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes)
 * If creating a new release for major or minor version:
     * [ ] Create a new release branch with the last commit and name it 'release/X.Y`
     * [ ] [Update the default branch](https://docs.github.com/en/organizations/managing-organization-settings/managing-the-default-branch-name-for-repositories-in-your-organization) on the github rep to the new release branch.
-
-
-## Hotfix checklist
-
-* [ ] Create a new branch named `hotfix/nameOfFix`
-* [ ] Create a PR for each affected release branch from your hotfix branch.
-* [ ] Apply the PR to each affected release.
-* If necessary (TODO, clarify guidance):
-    * [ ] Create a release with an updated Patch value (e.g. going from 1.1.0 to 1.1.1)
-    * [ ] Manually add the FunctionZip.zip file to the release.
-    * [ ] Update the related aka.ms url to point to the latest, fixed version.
