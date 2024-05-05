@@ -39,11 +39,11 @@ def increment_version(curr_version):
     return new_v
   
 if __name__ == "__main__":  
-    # if len(sys.argv) != 3:  
-    #     raise ValueError("Usage: python get_latest_testpypi_version.py <package_name> <tag_version>")  
+    if len(sys.argv) != 3:  
+        raise ValueError("Usage: python get_latest_testpypi_version.py <package_name> <tag_version>")  
       
-    package_name = "dspy-ai-test" # sys.argv[1]
-    tag_v = "1.5.9" # sys.argv[2]
+    package_name = sys.argv[1]
+    tag_v = sys.argv[2]
 
     latest_version, increment = get_latest_version(package_name, tag_v)  
     if increment:
