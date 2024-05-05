@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: "3.9"
       - name: Install dependencies
-        run: python3 -m pip install setuptools wheel twine semver
+        run: python3 -m pip install setuptools wheel twine semver packaging
       - name: Get correct version for TestPyPI release  
         id: check_version  
         run: |  
