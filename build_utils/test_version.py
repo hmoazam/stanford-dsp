@@ -30,7 +30,7 @@ def get_latest_version(package_name, tag_version):
     
 def increment_version(curr_version):
     parsed_v = semver.Version.parse(curr_version)
-    new_v = str(parsed_v.bump_prerelease(""))
+    new_v = str(parsed_v.bump_prerelease())
     return new_v
   
 if __name__ == "__main__":  
