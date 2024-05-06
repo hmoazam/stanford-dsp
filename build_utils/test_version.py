@@ -1,8 +1,10 @@
-from packaging.version import Version as PyPIVersion
+import sys
 from datetime import datetime
+
 import requests
 import semver
-import sys
+from packaging.version import Version as PyPIVersion
+
 
 def get_latest_version(package_name, tag_version):  
     # Returns latest version, and T/F as to whether it needs to be incremented
