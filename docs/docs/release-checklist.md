@@ -19,3 +19,7 @@
 * If creating a new release for major or minor version:
     * [ ] Create a new release branch with the last commit and name it 'release/X.Y`
     * [ ] [Update the default branch](https://docs.github.com/en/organizations/managing-organization-settings/managing-the-default-branch-name-for-repositories-in-your-organization) on the github rep to the new release branch.
+
+### Prerequisites
+
+The automation requires a [trusted publisher](https://docs.pypi.org/trusted-publishers/) to be set up on both the pypi and test-pypi packages. If the package is migrated to a new project, please follow the [steps](https://docs.pypi.org/trusted-publishers/adding-a-publisher/) to create a trusted publisher. If you have no releases on the new project, you may have to create a [pending trusted publisher](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/) to allow the first automated deployment. 
