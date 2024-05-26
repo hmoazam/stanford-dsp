@@ -27,8 +27,12 @@ def get_latest_version(package_name, tag_version):
             # Sort all uploads by upload time in descending order
             latest_upload = max(all_uploads, key=lambda x: datetime.fromisoformat(x[0].rstrip('Z')))  
             return latest_upload[2], True  
-    else:  
-        return None, None  
+    
+    elif response.status_code == 404:
+        # If no existing releases can get a 404
+        print("404 - package not found. This should only happen if this is the first release")
+        return tag_version, False
+    return None, None  
     
 def increment_version(curr_version):
     pypi_v = PyPIVersion(curr_version)
