@@ -30,7 +30,6 @@ def get_latest_version(package_name, tag_version):
     
     elif response.status_code == 404:
         # If no existing releases can get a 404
-        print("404 - package not found. This should only happen if this is the first release")
         return tag_version, False
     return None, None  
     
