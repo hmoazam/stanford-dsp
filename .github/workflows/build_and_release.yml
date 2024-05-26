@@ -66,14 +66,7 @@ jobs:
           python-version: "3.9"  
       - name: Install package from TestPyPI
         run: |  
-          for i in {1..5}; do  
-            if python3 -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple dspy-ai-test==${{ needs.extract-tag.outputs.version }}; then  
-              break  
-            else  
-              echo "Attempt $i failed. Waiting before retrying..."  
-              sleep 10  
-            fi  
-          done  
+          ../workflow_scripts/install_testpypi_pkg.sh ${{ needs.extract-tag.outputs.version }}
       - name: Install other dependencies
         run: |  
           python3 -m pip install openai~=0.28.1  
