@@ -66,7 +66,7 @@ jobs:
           python-version: "3.9"  
       - name: Install package from TestPyPI
         run: |
-          .github/workflow_scripts/install_testpypi_pkg.sh
+          .github/workflow_scripts/install_testpypi_pkg.sh ${{ needs.extract-tag.outputs.version }}
       - name: Install other dependencies
         run: |  
           python3 -m pip install openai~=0.28.1  
