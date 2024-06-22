@@ -77,7 +77,7 @@ jobs:
           echo "DSP_NOTEBOOK_CACHEDIR=$(pwd)/cache" >> $GITHUB_ENV  
       - name: Run Python script  
         run: |    
-          python3 build_utils/tests/intro.py trust_remote_code=True
+          python3 build_utils/tests/intro.py
 
   build-and-publish-pypi:
     needs: [extract-tag, build-and-publish-test-pypi, test-intro-script]
