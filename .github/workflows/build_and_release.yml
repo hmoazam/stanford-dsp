@@ -77,7 +77,7 @@ jobs:
           echo "DSP_NOTEBOOK_CACHEDIR=$(pwd)/cache" >> $GITHUB_ENV  
       - name: Run Python script  
         run: |    
-          run: pytest -c tests_integration/pytest.ini tests_integration/
+          pytest -c tests_integration/pytest.ini tests_integration/
 
   build-and-publish-pypi:
     needs: [extract-tag, build-and-publish-test-pypi, test-intro-script]
