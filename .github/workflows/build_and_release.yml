@@ -44,6 +44,15 @@ jobs:
         run: sed -i '/#replace_package_version_marker/{n;s/version="[^"]*"/version="${{ steps.check_version.outputs.version }}"/;}' setup.py
       - name: Update version in pyproject.toml
         run: sed -i '/#replace_package_version_marker/{n;s/version="[^"]*"/version="${{ steps.check_version.outputs.version }}"/;}' pyproject.toml        
+      - name: Configure Git user # Need to commit the change to the package version
+        run: |  
+          git config --global user.name 'github-actions'  
+          git config --global user.email 'github-actions@github.com' 
+      - name: Commit and push 
+        run: |  
+          git add setup.py pyproject.toml  
+          git commit -m "Update version to ${{ needs.extract-tag.outputs.version }}"  
+          git push
       - name: Update package name in setup.py
         run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="dspy-ai-test"/;}' setup.py
       - name: Update package name in pyproject.toml
@@ -101,10 +110,19 @@ jobs:
         run: sed -i '/#replace_package_version_marker/{n;s/version="[^"]*"/version="${{ needs.extract-tag.outputs.version }}"/;}' setup.py
       - name: Update version in pyproject.toml
         run: sed -i '/#replace_package_version_marker/{n;s/version="[^"]*"/version="${{ needs.extract-tag.outputs.version }}"/;}' pyproject.toml
+      - name: Configure Git user # Need to commit the change to the package version
+        run: |  
+          git config --global user.name 'github-actions'  
+          git config --global user.email 'github-actions@github.com' 
+      - name: Commit and push 
+        run: |
+          git add setup.py pyproject.toml  
+          git commit -m "Update version to ${{ needs.extract-tag.outputs.version }}"  
+          git push
       - name: Update package name in setup.py  
-        run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="dspy-ai"/;}' setup.py
+        run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="dspy-ai-hmoazam"/;}' setup.py
       - name: Update package name in pyproject.toml
-        run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="dspy-ai"/;}' pyproject.toml 
+        run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="dspy-ai-hmoazam"/;}' pyproject.toml 
       - name: Build a binary wheel
         run: python3 setup.py sdist bdist_wheel
       - name: Publish distribution 📦 to PyPI
