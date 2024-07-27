@@ -11,7 +11,7 @@ jobs:
     outputs:  
       version: ${{ steps.extract_tag.outputs.tag }}  
     steps:  
-      - uses: actions/checkout@v2  
+      - uses: actions/checkout@v4  
       - id: extract_tag  
         name: Extract tag name  
         run: echo "::set-output name=tag::$(echo $GITHUB_REF | cut -d / -f 3)"  
@@ -24,7 +24,7 @@ jobs:
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
       - name: Set up Python 3.9
         uses: actions/setup-python@v3
         with:
@@ -44,17 +44,6 @@ jobs:
         run: sed -i '/#replace_package_version_marker/{n;s/version="[^"]*"/version="${{ steps.check_version.outputs.version }}"/;}' setup.py
       - name: Update version in pyproject.toml
         run: sed -i '/#replace_package_version_marker/{n;s/version="[^"]*"/version="${{ steps.check_version.outputs.version }}"/;}' pyproject.toml        
-      - name: Configure Git user # Need to commit the change to the package version
-        run: |  
-          git config --global user.name 'github-actions'  
-          git config --global user.email 'github-actions@github.com' 
-      - name: Commit and push 
-        run: |
-          git checkout tmp-main  
-          git pull origin tmp-main
-          git add setup.py pyproject.toml  
-          git commit -m "Update version to ${{ needs.extract-tag.outputs.version }}"  
-          git push origin tmp-main
       - name: Update package name in setup.py
         run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="dspy-ai-test"/;}' setup.py
       - name: Update package name in pyproject.toml
@@ -100,8 +89,9 @@ jobs:
       name: pypi
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
+      contents: write # To push commit
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
       - name: Set up Python 3.9
         uses: actions/setup-python@v3
         with:
@@ -118,11 +108,9 @@ jobs:
           git config --global user.email 'github-actions@github.com' 
       - name: Commit and push 
         run: |
-          git checkout tmp-main  
-          git pull origin tmp-main
           git add setup.py pyproject.toml  
           git commit -m "Update version to ${{ needs.extract-tag.outputs.version }}"  
-          git push origin tmp-main
+          git push
       - name: Update package name in setup.py  
         run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="dspy-ai-hmoazam"/;}' setup.py
       - name: Update package name in pyproject.toml
