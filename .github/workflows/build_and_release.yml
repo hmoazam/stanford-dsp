@@ -110,7 +110,7 @@ jobs:
         run: |
           git add setup.py pyproject.toml  
           git commit -m "Update version to ${{ needs.extract-tag.outputs.version }}"  
-          git push
+          git push origin HEAD:tmp-main
       - name: Update package name in setup.py  
         run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="dspy-ai-hmoazam"/;}' setup.py
       - name: Update package name in pyproject.toml
