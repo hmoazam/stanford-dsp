@@ -57,7 +57,8 @@ jobs:
   #         verbose: true
 
   build-and-publish-pypi:
-    needs: [extract-tag, build-and-publish-test-pypi]
+    # needs: [extract-tag, build-and-publish-test-pypi]
+    needs: [extract-tag]
     runs-on: ubuntu-latest
     environment: 
       name: pypi
