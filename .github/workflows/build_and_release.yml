@@ -45,9 +45,9 @@ jobs:
       - name: Update version in pyproject.toml
         run: sed -i '/#replace_package_version_marker/{n;s/version="[^"]*"/version="${{ steps.check_version.outputs.version }}"/;}' pyproject.toml        
       - name: Update package name in setup.py
-        run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="dspy-ai-test"/;}' setup.py
+        run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="test-pkg-hmoazam"/;}' setup.py # TODO: switch to dspy-ai-test
       - name: Update package name in pyproject.toml
-        run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="dspy-ai-test"/;}' pyproject.toml  
+        run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="test-pkg-hmoazam"/;}' pyproject.toml  # TODO: switch to dspy-ai-test
       - name: Build a binary wheel
         run: python3 setup.py sdist bdist_wheel
       - name: Publish distribution 📦 to test-PyPI
