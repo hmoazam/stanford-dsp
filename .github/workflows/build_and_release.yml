@@ -82,7 +82,7 @@ jobs:
         run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="dspy-ai-hmoazam"/;}' pyproject.toml # TODO -> dspy-ai
       - name: Build a binary wheel
         run: python3 setup.py sdist bdist_wheel
-      - name: Publish distribution 📦 to PyPI
+      - name: Publish distribution 📦 to PyPI (dspy-ai)
         uses: pypa/gh-action-pypi-publish@release/v1 # This requires a trusted publisher to be setup in pypi
       # Publish to dspy
       - name: Update package name in setup.py  
@@ -91,7 +91,7 @@ jobs:
         run: sed -i '/#replace_package_name_marker/{n;s/name="[^"]*"/name="test-pkg-hmoazam"/;}' pyproject.toml # TODO -> dspy
       - name: Build a binary wheel
         run: python3 setup.py sdist bdist_wheel
-      - name: Publish distribution 📦 to PyPI
+      - name: Publish distribution 📦 to PyPI (dspy)
         uses: pypa/gh-action-pypi-publish@release/v1 # This requires a trusted publisher to be setup in pypi
 
     
