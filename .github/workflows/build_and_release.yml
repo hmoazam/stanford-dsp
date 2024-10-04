@@ -116,9 +116,14 @@ jobs:
     
       - name: Commit and Push changes  
         run: |  
+          # Checkout a new branch based on the current commit  
+          git checkout -b version-update-${{ needs.extract-tag.outputs.version }}  
+            
+          # Stage the changes  
           git add setup.py pyproject.toml ./dspy/.internal_dspyai/setup.py  
-          git commit -m "Automated changes to versions in setup.py and pyproject.toml"  
-          # Push the changes using the built-in GITHUB_TOKEN  
-          git push 
-
-    
+            
+          # Check for changes and commit them if they exist  
+          git diff --quiet && git diff --staged --quiet || git commit -m "Automated changes to versions in setup.py and pyproject.toml"  
+            
+          # Push the changes to the repository  
+          git push --set-upstream origin version-update-${{ needs.extract-tag.outputs.version }} 
