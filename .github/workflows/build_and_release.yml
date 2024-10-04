@@ -54,7 +54,6 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1 # This requires a trusted publisher to be setup in pypi/testpypi
         with: 
           repository-url: https://test.pypi.org/legacy/
-          verbose: true
 
   build-and-publish-pypi:
     needs: [extract-tag, build-and-publish-test-pypi]
@@ -87,7 +86,7 @@ jobs:
 
       # Publish to dspy-ai
       - name: Change directory to dspy-ai  
-        run: cd ../../dspy/.internal_dspyai 
+        run: cd dspy/.internal_dspyai 
       - name: Update version in setup.py (dspy)
         run: sed -i '/#replace_package_version_marker/{n;s/version="[^"]*"/version="${{ needs.extract-tag.outputs.version }}"/;}' setup.py
       - name: Update package name in setup.py  
