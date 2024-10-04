@@ -90,7 +90,7 @@ jobs:
       - name: Check curr directory
         run: | 
           pwd
-          cd ./dspy/.internal_dspyai/setup.py
+          cd dspy/.internal_dspyai/setup.py
           pwd
       - name: Update version in setup.py (dspy-ai)
         run: sed -i '/#replace_package_version_marker/{n;s/version="[^"]*"/version="${{ needs.extract-tag.outputs.version }}"/;}' ./dspy/.internal_dspyai/setup.py
