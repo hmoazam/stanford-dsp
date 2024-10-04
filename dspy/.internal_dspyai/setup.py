@@ -4,7 +4,8 @@ from setuptools import find_packages, setup
 with open("README.md", encoding="utf-8") as f:
     long_description = f.read()
 
-setup(	
+setup(
+    #replace_package_name_marker
     name="dspy-ai",
     #replace_package_version_marker
     version="2.5.3", 	
