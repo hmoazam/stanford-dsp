@@ -99,5 +99,23 @@ jobs:
         run: python3 ./dspy/.internal_dspyai/setup.py sdist bdist_wheel
       - name: Publish distribution 📦 to PyPI (dspy-ai)
         uses: pypa/gh-action-pypi-publish@release/v1 # This requires a trusted publisher to be setup in pypi
+  
+  push-changes:
+    needs: [extract-tag, build-and-publish-test-pypi, build-and-publish-pypi]
+    runs-on: ubuntu-latest
+    environment: 
+      name: pypi
+    steps:
+      - name: Configure git  
+        run: |  
+          git config user.name "Hanna Moazam"  
+          git config user.email "hannamoazam@gmail.com"  
+    
+      - name: Commit and Push changes  
+        run: |  
+          git add setup.py pyproject.toml ./dspy/.internal_dspyai/setup.py  
+          git commit -m "Automated changes to versions in setup.py and pyproject.toml"  
+          # Push the changes using the built-in GITHUB_TOKEN  
+          git push 
 
     
