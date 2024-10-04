@@ -101,7 +101,7 @@ jobs:
           sed -i '/#replace_dspy_version_marker/{n;s/dspy==[^"]*/dspy==${{ needs.extract-tag.outputs.version }}/;}' ./dspy/.internal_dspyai/setup.py  
           cat dspy/.internal_dspyai/setup.py
       - name: Build a binary wheel
-        run: python3 setup.py sdist bdist_wheel
+        run: python3 ./dspy/.internal_dspyai/setup.py sdist bdist_wheel
       - name: Publish distribution 📦 to PyPI (dspy-ai)
         uses: pypa/gh-action-pypi-publish@release/v1 # This requires a trusted publisher to be setup in pypi
 
