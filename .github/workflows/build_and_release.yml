@@ -96,6 +96,5 @@ jobs:
         run: python3 ./dspy/.internal_dspyai/setup.py sdist bdist_wheel
       - name: Publish distribution 📦 to PyPI (dspy-ai)
         uses: pypa/gh-action-pypi-publish@release/v1 # This requires a trusted publisher to be setup in pypi
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Update version for new releases
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
