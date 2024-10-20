@@ -65,6 +65,9 @@ jobs:
       contents: write # To allow action to commit changes back to main
     steps:
       - uses: actions/checkout@v4
+      - name: Create and checkout new branch
+        run: | 
+          git checkout -b "new-release"
       - name: Set up Python 3.9
         uses: actions/setup-python@v3
         with:
